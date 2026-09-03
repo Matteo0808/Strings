@@ -6,7 +6,7 @@ enum ErrorOrSuccess {
     RET_ERROR = 1
 };
 
-int StrLen(const char str[]);
+size_t StrLen(const char str[]);
 int Puts(const char str[]);
 char* StrCpy(char str_dest[], const char str_src[]);
 char* StrCat(char str_dest[], const char str_src[]);
@@ -27,11 +27,11 @@ int main(){
         printf("TESTS_FAILED\n");
         return RET_ERROR;
     }
-    
     char str[] = "lavashgovyadina";
     int len = StrLen(str);
     printf("%d\n", len);
     int test = Puts(str);
+    printf("%d", test);
     char tw[] = "tvoya mama";
     StrCpy(str, tw);
     //printf("%d\n", test);
@@ -68,30 +68,49 @@ ErrorOrSuccess TestStrLen(){
 }
 
 ErrorOrSuccess TestStrCpy(){
-    char test_arr1[][] = {" ", "test1", "test1.5:)", "test2_qwertyQWERTY", "test3_\0", "tes\0t4", "\0test5"};
-    test_arr1[1][4] = '2';
+    char test_str1 = " ", "test1", "test1.5:)", "test2_qwertyQWERTY", "test3_\0", "tes\0t4", "\0test5"
+    char test_str1
+    char test_str1
+    char test_str1
+    char test_str1
+    char test_str1
+    char test_str1
     const char* test_arr2[] = {" ", "test1", "test1.5:)", "test2_qwertyQWERTY", "test3_\0", "tes\0t4", "\0test5"};
     for(int i = 0; i < 7; i++){
-        for(int j = 0; j < 7; j++){
-            if (strcmp(strcpy(test_arr1[i], test_arr2[j]), StrCpy(test_arr1[i], test_arr2[j])) != 0){
-                return RET_ERROR;
-            }
-            continue;
+        if (strcmp(strcpy(test_str, test_arr[i]), StrCpy(test_arr1[i], test_arr2[j])) != 0){
+            return RET_ERROR;
         }
+        continue;
     }
     return RET_SUCCESS;
 
 }
 
 ErrorOrSuccess TestStrCat(){
-    
+    char teststr1[] = "qwert";
+    char teststr2[] = "y\0";
+    char teststr3[] = "w\0w";
+    if(strcmp(strcat(teststr1, teststr2), StrCat(teststr1, teststr2)) != 0) {return RET_ERROR;}
+    if(strcmp(strcat(teststr2, teststr3), StrCat(teststr2, teststr3)) != 0) {return RET_ERROR;}
+    if(strcmp(strcat(teststr1, teststr3), StrCat(teststr1, teststr3)) != 0) {return RET_ERROR;}
+    return RET_SUCCESS;
 }
 
 ErrorOrSuccess TestStrCmp(){
-    
+    char test_arr1[][] = {" ", "test1", "test1.5:)", "test2_qwertyQWERTY", "test3_\0", "tes\0t4", "\0test5"};
+    const char* test_arr2[] = {" ", "test1", "test1.5:)", "test2_qwertyQWERTY", "test3_\0", "tes\0t4", "\0test5"};
+    for(int i = 0; i < 7; i++){
+        for(int j = 0; j < 7; j++){
+            if (strcmp(test_arr1[i], test_arr2[j]) == StrCmp(test_arr1[i], test_arr2[j])){
+                return RET_ERROR;
+            }
+            continue;
+        }
+    }
+    return RET_SUCCESS;
 }
 
-int StrLen(const char str[]){
+size_t StrLen(const char str[]){
     int i = 0;
     while(str[i] != '\0'){
         i++;
@@ -151,12 +170,3 @@ int StrCmp(const char str_dest[], const char str_src[]){
         continue;
     }
 }
-
-// int TestStrLen();
-// int TestPuts();
-// int TestStrCpy();
-// int TestStrCat();
-// int TestStrCmp();
-
-
-
