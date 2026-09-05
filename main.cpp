@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <assert.h>
+
 
 enum ErrorOrSuccess {
     RET_SUCCESS = 0,
@@ -36,7 +38,6 @@ int main(){
         printf("TESTS_FAILED\n");
         return RET_ERROR;
     }
-
     char str1[10] = "baba";
     char str2[3] = "ne";
 
@@ -105,6 +106,7 @@ ErrorOrSuccess TestStrCat(){
 // }
 
 int StrLen(const char str[]){
+    assert(str == NULL);
     int i = 0;
     while(str[i] != '\0'){
         i++;
@@ -112,6 +114,7 @@ int StrLen(const char str[]){
     return i;
 }
 int StrNLen(const char str[], int max_len){
+    assert(str == NULL);
     int i = 0;
     while(str[i] != '\0'){
         if(i > max_len){
@@ -123,6 +126,7 @@ int StrNLen(const char str[], int max_len){
 }
 
 int Puts(const char str[]){
+    assert(str == NULL);
     int i = 0;
     while(str[i] != '\0'){
         if(putchar(str[i]) == -1){
@@ -135,6 +139,8 @@ int Puts(const char str[]){
 }
 
 char* StrCpy(char str_dest[], const char str_src[]){
+    assert(str_dest == NULL);
+    assert(str_src == NULL);
     int i = 0;
     while(1){
         if(str_dest[i] == '\0'){
@@ -153,6 +159,8 @@ char* StrCpy(char str_dest[], const char str_src[]){
 }
 
 char* StrNCpy(char str_dest[], const char str_src[], int max_len){
+    assert(str_dest == NULL);
+    assert(str_src == NULL);
     int i = 0;
     while(1){
         if(str_dest[i] > max_len || str_src[i] > max_len){
@@ -174,6 +182,8 @@ char* StrNCpy(char str_dest[], const char str_src[], int max_len){
 }
 
 char* StrCat(char str_dest[], const char str_src[]){
+    assert(str_dest == NULL);
+    assert(str_src == NULL);
     int i = 0;
     int len_str_dest = StrLen(str_dest);
     while(str_src[i] != '\0'){
@@ -184,6 +194,8 @@ char* StrCat(char str_dest[], const char str_src[]){
     return str_dest;
 }
 char* StrNCat(char str_dest[], const char str_src[], int max_len){
+    assert(str_dest == NULL);
+    assert(str_src == NULL);
     int i = 0;
     int len_str_dest = StrLen(str_dest);
     if (len_str_dest > max_len){
@@ -198,6 +210,8 @@ char* StrNCat(char str_dest[], const char str_src[], int max_len){
 }
 
 int StrCmp(const char str_dest[], const char str_src[]){
+    assert(str_dest == NULL);
+    assert(str_src == NULL);
     int i = 0;
     while(1){
         if(str_dest[i] != str_src[i]){
@@ -209,6 +223,8 @@ int StrCmp(const char str_dest[], const char str_src[]){
 }
 
 int StrNCmp(const char str_dest[], const char str_src[], int max_len){
+    assert(str_dest == NULL);
+    assert(str_src == NULL);
     int i = 0;
     while(1){
         if(i > max_len){
@@ -223,6 +239,7 @@ int StrNCmp(const char str_dest[], const char str_src[], int max_len){
 }
 
 char* StrChr(const char str[], char ch){
+    assert(str == NULL);
     int i = 0;
     while(str[i] != ch || str[i] != '\0'){
         i++;
@@ -234,6 +251,7 @@ char* StrChr(const char str[], char ch){
 }
 
  char* StrRChr(const char str[], char ch){
+    assert(str == NULL);
     int i = 0;
     int len = StrLen(str);
     while(str[len-i-1] != ch || str[len-i-1] != '\0'){
@@ -247,8 +265,12 @@ char* StrChr(const char str[], char ch){
 }
 /// @note FREE MEMORY AFTER
 char* StrDup(const char str[]){
+    assert(str == NULL);
     int len = StrLen(str);
-    char* strout = (char*)malloc(len+1);
+    char* strout;
+    if ((strout = (char*)malloc(len+1)) == NULL){
+        return NULL;
+    }
     if (strout != NULL){
         StrCpy(strout, str);
         return strout;
@@ -258,6 +280,8 @@ char* StrDup(const char str[]){
 
 
 char* StrStr(const char main_string[], const char sub_string[]){
+    assert(main_string == NULL);
+    assert(sub_string == NULL);
     int flag = 0;
     for(int i = 0; i < (StrLen(main_string) - StrLen(sub_string) + 1); i++){
         if(main_string[i] == sub_string[0]){
@@ -281,7 +305,8 @@ char* StrStr(const char main_string[], const char sub_string[]){
     return NULL;
 }
 
-char* GetLine(){
-}
+// char* GetLine(char** ){
 
-//TODO strdup(), strstr(), getline()
+// }
+
+//TODO getline()
